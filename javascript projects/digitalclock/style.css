@@ -1,0 +1,76 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #16213e;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+h1 {
+    color: #0f3460;
+    margin-bottom: 30px;
+    color: #e94560;
+}
+
+h2 {
+    color: #c0c0c0;
+    border-bottom: 2px solid #e94560;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.display {
+    background-color: #0f0c29;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+button {
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#start {
+    background-color: #28a745; /* Green */
+}
+#start:hover {
+    background-color: #218838;
+}
+
+#stop {
+    background-color: #dc3545; /* Red */
+}
+#stop:hover {
+    background-color: #c82333;
+}
+
+#reset {
+    background-color: #6c757d; /* Gray */
+}
+#reset:hover {
+    background-color: #5a6268;
+}
