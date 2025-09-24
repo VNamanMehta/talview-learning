@@ -1,1 +1,1 @@
-###Learning JavaScript and React
+## Learning JavaScript and React
