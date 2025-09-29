@@ -1,4 +1,6 @@
 import sum from "./sum";
+import { jest, test, expect } from '@jest/globals';
+
 
 test('adds 1 + 2 to equal 3', () => {
   expect(sum(1, 2)).toBe(3);
@@ -98,3 +100,84 @@ test('except.assertion with async and jest',async() => {
     expect(error).toMatch("Error")
   }
 })
+
+function getData(callback) {
+  fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then(res => res.json())
+  .then(data => callback(null, data))
+  .catch(error => callback(error, null))
+}
+
+test('expect using callbacks and done()', done => {
+  getData((error,data) => {
+    if (error) return done(error)
+    try {
+      expect(data.title).toMatch("delectus")
+      done()
+    } catch (error) {
+      done(error)
+    }
+  })
+})
+
+describe("testing data with beforeEach",() => {
+  let data;
+  beforeEach(async() => {
+  const res  = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+  data = await res.json()
+  })
+
+  test("should have correct title from fetched data",() => {
+    expect(data.title).toMatch("delectus")
+  })
+
+  test("should have correct userId from fetched data",() => {
+    expect(data.userId).toBe(1)
+  })
+})
+
+describe("testing data with beforeAll",() => {
+  let data;
+  beforeAll(async() => {
+  const res  = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+  data = await res.json()
+  })
+
+  test("should have correct title from fetched data",() => {
+    expect(data.title).toMatch("delectus")
+  })
+
+  test("should have correct userId from fetched data",() => {
+    expect(data.userId).toBe(1)
+  })
+})
+
+function forEach(items, callback) {
+  for (const item of items) {
+    callback(item)
+  }
+}
+
+const mockCallback = jest.fn(x => x+42)
+test("forEach mock function",() => {
+  forEach([0,1], mockCallback)
+  expect(mockCallback.mock.calls).toHaveLength(2)
+  expect(mockCallback.mock.calls[0][0]).toBe(0)
+  expect(mockCallback.mock.calls[1][0]).toBe(1)
+  expect(mockCallback.mock.results[0].value).toBe(42)
+  expect(mockCallback.mock.results[1].value).toBe(43)
+})
+
+const m = jest.fn()
+console.log(m())
+m.mockReturnValueOnce(10).mockReturnValueOnce('x').mockReturnValue(true)
+
+console.log(m(), m(), m(), m())
+
+const myMockFn = jest
+  .fn()
+  .mockImplementationOnce(cb => cb(null, true))
+  .mockImplementationOnce(cb => cb(null, false))
+
+myMockFn((err, val) => console.log(val))
+myMockFn((err, val) => console.log(val))
